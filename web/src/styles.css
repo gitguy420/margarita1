@@ -41,21 +41,49 @@ body::after {
 
 body::before {
   background-image:
-    radial-gradient(circle, rgba(255, 197, 107, 0.9) 1px, transparent 1.7px),
-    radial-gradient(circle, rgba(255, 178, 82, 0.78) 1px, transparent 1.8px),
-    radial-gradient(circle, rgba(255, 214, 140, 0.94) 1px, transparent 2px);
-  background-size: 92px 92px, 128px 128px, 174px 174px;
-  background-position: 0 0, 44px 18px, 16px 60px;
+    radial-gradient(circle at 3% 12%, rgba(255, 197, 107, 0.95) 1px, transparent 1.7px),
+    radial-gradient(circle at 9% 68%, rgba(255, 178, 82, 0.8) 1px, transparent 1.8px),
+    radial-gradient(circle at 14% 28%, rgba(255, 214, 140, 0.96) 1px, transparent 2px),
+    radial-gradient(circle at 19% 84%, rgba(255, 197, 107, 0.92) 1px, transparent 1.8px),
+    radial-gradient(circle at 24% 42%, rgba(255, 178, 82, 0.86) 1px, transparent 1.9px),
+    radial-gradient(circle at 31% 16%, rgba(255, 214, 140, 0.95) 1px, transparent 2px),
+    radial-gradient(circle at 37% 74%, rgba(255, 197, 107, 0.94) 1px, transparent 1.8px),
+    radial-gradient(circle at 44% 51%, rgba(255, 178, 82, 0.82) 1px, transparent 1.9px),
+    radial-gradient(circle at 48% 8%, rgba(255, 214, 140, 0.94) 1px, transparent 2px),
+    radial-gradient(circle at 53% 88%, rgba(255, 197, 107, 0.94) 1px, transparent 1.8px),
+    radial-gradient(circle at 59% 35%, rgba(255, 178, 82, 0.82) 1px, transparent 1.9px),
+    radial-gradient(circle at 63% 66%, rgba(255, 214, 140, 0.96) 1px, transparent 2px),
+    radial-gradient(circle at 71% 19%, rgba(255, 197, 107, 0.95) 1px, transparent 1.7px),
+    radial-gradient(circle at 76% 79%, rgba(255, 178, 82, 0.82) 1px, transparent 1.9px),
+    radial-gradient(circle at 82% 46%, rgba(255, 214, 140, 0.96) 1px, transparent 2px),
+    radial-gradient(circle at 89% 14%, rgba(255, 197, 107, 0.93) 1px, transparent 1.8px),
+    radial-gradient(circle at 94% 62%, rgba(255, 178, 82, 0.84) 1px, transparent 1.9px),
+    radial-gradient(circle at 97% 31%, rgba(255, 214, 140, 0.96) 1px, transparent 2px);
+  background-repeat: no-repeat;
   animation: twinkleA 2.8s ease-in-out infinite;
 }
 
 body::after {
   background-image:
-    radial-gradient(circle, rgba(255, 188, 96, 0.96) 1px, transparent 1.6px),
-    radial-gradient(circle, rgba(255, 171, 74, 0.8) 1px, transparent 1.9px),
-    radial-gradient(circle, rgba(255, 221, 154, 0.94) 1px, transparent 2px);
-  background-size: 106px 106px, 146px 146px, 196px 196px;
-  background-position: 26px 42px, 78px 0, 14px 98px;
+    radial-gradient(circle at 6% 38%, rgba(255, 188, 96, 0.96) 1px, transparent 1.7px),
+    radial-gradient(circle at 11% 91%, rgba(255, 171, 74, 0.8) 1px, transparent 1.9px),
+    radial-gradient(circle at 17% 59%, rgba(255, 221, 154, 0.96) 1px, transparent 2px),
+    radial-gradient(circle at 22% 7%, rgba(255, 188, 96, 0.94) 1px, transparent 1.7px),
+    radial-gradient(circle at 27% 47%, rgba(255, 171, 74, 0.82) 1px, transparent 1.9px),
+    radial-gradient(circle at 34% 82%, rgba(255, 221, 154, 0.96) 1px, transparent 2px),
+    radial-gradient(circle at 39% 27%, rgba(255, 188, 96, 0.94) 1px, transparent 1.7px),
+    radial-gradient(circle at 46% 63%, rgba(255, 171, 74, 0.8) 1px, transparent 1.9px),
+    radial-gradient(circle at 51% 12%, rgba(255, 221, 154, 0.96) 1px, transparent 2px),
+    radial-gradient(circle at 57% 76%, rgba(255, 188, 96, 0.94) 1px, transparent 1.7px),
+    radial-gradient(circle at 62% 43%, rgba(255, 171, 74, 0.82) 1px, transparent 1.9px),
+    radial-gradient(circle at 68% 94%, rgba(255, 221, 154, 0.96) 1px, transparent 2px),
+    radial-gradient(circle at 73% 24%, rgba(255, 188, 96, 0.94) 1px, transparent 1.7px),
+    radial-gradient(circle at 79% 57%, rgba(255, 171, 74, 0.82) 1px, transparent 1.9px),
+    radial-gradient(circle at 84% 4%, rgba(255, 221, 154, 0.96) 1px, transparent 2px),
+    radial-gradient(circle at 88% 71%, rgba(255, 188, 96, 0.94) 1px, transparent 1.7px),
+    radial-gradient(circle at 93% 41%, rgba(255, 171, 74, 0.82) 1px, transparent 1.9px),
+    radial-gradient(circle at 98% 86%, rgba(255, 221, 154, 0.96) 1px, transparent 2px);
+  background-repeat: no-repeat;
   animation: twinkleB 3.4s ease-in-out infinite;
 }
 

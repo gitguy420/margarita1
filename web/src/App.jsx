@@ -282,8 +282,8 @@ export default function App() {
         <div className="submit">
           <button className={loading ? 'is-busy' : ''} type="submit" disabled={!isReady || loading}>
             <span className="btn-core">{loading ? 'Рейс формируется' : 'Получить PDF отчёт'}</span>
-            <span className="btn-writer" aria-hidden="true">
-              🖋
+            <span className="btn-doc" aria-hidden="true">
+              📄
             </span>
           </button>
           {message && <div className="message">{message}</div>}

@@ -168,12 +168,61 @@ function PersonCard({ label, person, onChange, regions }) {
   );
 }
 
+function HowItWorksPage() {
+  return (
+    <section className="card info-page">
+      <h2>Как это работает</h2>
+      <ol>
+        <li>Вы вводите данные рождения двух людей: дату, время и место.</li>
+        <li>Приложение автоматически определяет координаты выбранного города.</li>
+        <li>Сервер строит натальные карты и межкартные аспекты (синастрию).</li>
+        <li>По найденным аспектам формируется текстовое описание совместимости.</li>
+        <li>Итог собирается в PDF и сразу отдается вам в скачивание.</li>
+      </ol>
+    </section>
+  );
+}
+
+function EvidencePage() {
+  return (
+    <section className="card info-page">
+      <h2>Почему расчёт можно проверить</h2>
+      <ul>
+        <li>Используется библиотека `astronomy-engine` (MIT), а не случайная генерация.</li>
+        <li>Координаты городов берутся из локальной таблицы, чтобы расчёт опирался на реальные точки.</li>
+        <li>Одинаковые входные данные дают одинаковый результат на сервере.</li>
+        <li>
+          Есть служебный endpoint `GET /api/status`, который показывает, что API и база городов загружены.
+        </li>
+        <li>PDF формируется сервером через `puppeteer`, поэтому результат воспроизводим и не зависит от телефона.</li>
+      </ul>
+    </section>
+  );
+}
+
+function InfoPage() {
+  return (
+    <section className="card info-page">
+      <h2>Информация</h2>
+      <p>
+        Этот Mini App помогает получить структурированный синастрический отчёт по двум людям. Он не заменяет
+        консультацию специалиста и предназначен как аналитический инструмент для личного использования.
+      </p>
+      <p>
+        Если время рождения неизвестно, расчёт выполняется по дневному времени и интерпретация становится менее
+        точной для домов и осей карты.
+      </p>
+    </section>
+  );
+}
+
 export default function App() {
   const { regions, error } = useRegions();
   const [partnerA, setPartnerA] = useState(emptyPerson);
   const [partnerB, setPartnerB] = useState(emptyPerson);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [page, setPage] = useState('calculator');
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -265,30 +314,63 @@ export default function App() {
         {error && <div className="error">{error}</div>}
       </header>
 
-      <form className="form" onSubmit={handleSubmit}>
-        <PersonCard
-          label="Партнёр A"
-          person={partnerA}
-          onChange={(patch) => setPartnerA((p) => ({ ...p, ...patch }))}
-          regions={regions}
-        />
-        <PersonCard
-          label="Партнёр B"
-          person={partnerB}
-          onChange={(patch) => setPartnerB((p) => ({ ...p, ...patch }))}
-          regions={regions}
-        />
+      <nav className="top-nav">
+        <button
+          type="button"
+          className={`nav-pill ${page === 'calculator' ? 'active' : ''}`}
+          onClick={() => setPage('calculator')}
+        >
+          Расчёт
+        </button>
+        <button type="button" className={`nav-pill ${page === 'how' ? 'active' : ''}`} onClick={() => setPage('how')}>
+          Как это работает
+        </button>
+        <button
+          type="button"
+          className={`nav-pill ${page === 'facts' ? 'active' : ''}`}
+          onClick={() => setPage('facts')}
+        >
+          Факты
+        </button>
+        <button
+          type="button"
+          className={`nav-pill ${page === 'info' ? 'active' : ''}`}
+          onClick={() => setPage('info')}
+        >
+          Информация
+        </button>
+      </nav>
 
-        <div className="submit">
-          <button className={loading ? 'is-busy' : ''} type="submit" disabled={!isReady || loading}>
-            <span className="btn-core">{loading ? 'Рейс формируется' : 'Получить PDF отчёт'}</span>
-            <span className="btn-doc" aria-hidden="true">
-              📄
-            </span>
-          </button>
-          {message && <div className="message">{message}</div>}
-        </div>
-      </form>
+      {page === 'calculator' && (
+        <form className="form" onSubmit={handleSubmit}>
+          <PersonCard
+            label="Партнёр A"
+            person={partnerA}
+            onChange={(patch) => setPartnerA((p) => ({ ...p, ...patch }))}
+            regions={regions}
+          />
+          <PersonCard
+            label="Партнёр B"
+            person={partnerB}
+            onChange={(patch) => setPartnerB((p) => ({ ...p, ...patch }))}
+            regions={regions}
+          />
+
+          <div className="submit">
+            <button className={loading ? 'is-busy' : ''} type="submit" disabled={!isReady || loading}>
+              <span className="btn-core">{loading ? 'Рейс формируется' : 'Получить PDF отчёт'}</span>
+              <span className="btn-doc" aria-hidden="true">
+                📄
+              </span>
+            </button>
+            {message && <div className="message">{message}</div>}
+          </div>
+        </form>
+      )}
+
+      {page === 'how' && <HowItWorksPage />}
+      {page === 'facts' && <EvidencePage />}
+      {page === 'info' && <InfoPage />}
     </div>
   );
 }

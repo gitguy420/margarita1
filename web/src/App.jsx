@@ -66,19 +66,19 @@ function PersonCard({ label, person, onChange, regions }) {
   const ticketCode = label.includes('A') ? 'КАРТОЧКА 1' : 'КАРТОЧКА 2';
 
   return (
-    <section className="card ticket-card">
-      <div className="ticket-head">
-        <div className="ticket-route">
-          <span className="ticket-chip">{ticketCode}</span>
-          <div className="ticket-title">{label}</div>
+    <section className="card astro-card">
+      <div className="astro-head">
+        <div className="astro-route">
+          <span className="astro-chip">{ticketCode}</span>
+          <div className="astro-title">{label}</div>
         </div>
-        <div className="ticket-meta">
+        <div className="astro-meta">
           <span>Синастрия</span>
           <span>Лунный поток</span>
         </div>
       </div>
 
-      <div className="ticket-divider" aria-hidden="true" />
+      <div className="astro-divider" aria-hidden="true" />
 
       <div className="grid">
         <label>
@@ -247,9 +247,21 @@ export default function App() {
   return (
     <div className="app">
       <header className="hero">
-        <div className="sparkle">✨</div>
-        <h1>Маргарита</h1>
-        <p>Синастрия, которая раскрывает сильные стороны пары и даёт нежные подсказки ❤️</p>
+        <div className="hero-stars" aria-hidden="true" />
+        <div className="hero-layout">
+          <div className="hero-copy">
+            <div className="sparkle">✦</div>
+            <h1>Маргарита</h1>
+            <p>Синастрия, которая раскрывает сильные стороны пары и даёт нежные подсказки ❤️</p>
+          </div>
+          <div className="hero-art" aria-hidden="true">
+            <div className="tarot-fan">
+              <span className="tarot tarot-1" />
+              <span className="tarot tarot-2" />
+              <span className="tarot tarot-3" />
+            </div>
+          </div>
+        </div>
         {error && <div className="error">{error}</div>}
       </header>
 

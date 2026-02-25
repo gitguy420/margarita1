@@ -10,9 +10,21 @@ const emptyPerson = {
   city: ''
 };
 const HOUSE_SYSTEMS = [
-  { value: 'whole_sign', label: 'Целый знак (Whole Sign)' },
-  { value: 'equal', label: 'Равнодомная (Equal)' },
-  { value: 'solar', label: 'Солнечные дома (Solar)' }
+  {
+    value: 'whole_sign',
+    label: 'Целый знак',
+    description: 'Дом = знак. Самая стабильная и прозрачная система.'
+  },
+  {
+    value: 'equal',
+    label: 'Равнодомная',
+    description: '12 равных домов по 30°. Удобна для сравнений.'
+  },
+  {
+    value: 'solar',
+    label: 'Солнечные дома',
+    description: 'Точка отсчёта от знака Солнца, мягкий общий профиль.'
+  }
 ];
 
 function useRegions() {
@@ -377,20 +389,6 @@ export default function App() {
 
       {page === 'calculator' && (
         <form className="form" onSubmit={handleSubmit}>
-          <section className="card settings-card">
-            <label>
-              Система расчёта домов
-              <select value={houseSystem} onChange={(e) => setHouseSystem(e.target.value)}>
-                {HOUSE_SYSTEMS.map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <div className="hint">При неизвестном времени дома не рассчитываются независимо от выбранной системы.</div>
-          </section>
-
           <PersonCard
             label="Партнёр A"
             person={partnerA}
@@ -403,6 +401,24 @@ export default function App() {
             onChange={(patch) => setPartnerB((p) => ({ ...p, ...patch }))}
             regions={regions}
           />
+
+          <section className="card house-systems-card">
+            <h3>Система расчёта домов</h3>
+            <div className="house-grid">
+              {HOUSE_SYSTEMS.map((item) => (
+                <button
+                  key={item.value}
+                  type="button"
+                  className={`house-option ${houseSystem === item.value ? 'active' : ''}`}
+                  onClick={() => setHouseSystem(item.value)}
+                >
+                  <span className="house-option-title">{item.label}</span>
+                  <span className="house-option-desc">{item.description}</span>
+                </button>
+              ))}
+            </div>
+            <div className="hint">При неизвестном времени дома не рассчитываются независимо от выбранной системы.</div>
+          </section>
 
           <div className="submit">
             <button className={loading ? 'is-busy' : ''} type="submit" disabled={!isReady || loading}>

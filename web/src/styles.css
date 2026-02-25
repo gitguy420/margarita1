@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Manrope:wght@300;400;600&display=swap');
 
 :root {
-  --bg: #eff5ff;
-  --bg-2: #dff0ff;
-  --ink: #132238;
-  --ink-muted: #496180;
-  --accent: #0097a7;
-  --accent-2: #0069c0;
-  --ticket: #fffefb;
-  --ticket-edge: #c9d8ea;
-  --shadow: 0 16px 38px rgba(8, 42, 80, 0.14);
+  --bg: #f7f4ff;
+  --bg-2: #eaf8ff;
+  --ink: #2d3659;
+  --ink-muted: #6e79a2;
+  --accent: #8ab7ff;
+  --accent-2: #b495ff;
+  --ticket: #fffdfd;
+  --ticket-edge: #e4dcf7;
+  --shadow: 0 16px 38px rgba(86, 76, 132, 0.12);
 }
 
 * {
@@ -21,7 +21,7 @@ body {
   font-family: 'Manrope', sans-serif;
   background: radial-gradient(circle at 10% 10%, #ffffff, transparent 35%),
     radial-gradient(circle at 80% 0%, var(--bg-2), transparent 45%),
-    linear-gradient(165deg, #edf4ff, var(--bg));
+    linear-gradient(165deg, #fdfbff, var(--bg));
   color: var(--ink);
 }
 
@@ -32,7 +32,7 @@ body {
 }
 
 .hero {
-  background: linear-gradient(120deg, #ffffff, #dff2ff);
+  background: linear-gradient(120deg, #fff7fb, #edf5ff);
   padding: 26px 28px;
   border-radius: 24px;
   box-shadow: var(--shadow);
@@ -45,7 +45,7 @@ body {
   position: absolute;
   width: 260px;
   height: 260px;
-  background: radial-gradient(circle, rgba(0, 105, 192, 0.18), transparent 65%);
+  background: radial-gradient(circle, rgba(173, 149, 255, 0.2), transparent 65%);
   right: -80px;
   top: -120px;
 }
@@ -124,7 +124,7 @@ h1 {
   justify-content: center;
   padding: 6px 10px;
   border-radius: 999px;
-  background: #0f2f52;
+  background: #a38de2;
   color: #fff;
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -142,12 +142,12 @@ h1 {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--ink-muted);
+  color: #8a79bb;
 }
 
 .ticket-divider {
   margin: 14px 0 16px;
-  border-top: 2px dashed #9eb7d7;
+  border-top: 2px dashed #d8cdef;
 }
 
 .grid {
@@ -166,7 +166,7 @@ label {
 input, select {
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid #b6cbe4;
+  border: 1px solid #d4ccec;
   font-size: 14px;
   font-family: inherit;
   background: white;
@@ -176,7 +176,7 @@ input, select {
 input:focus, select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(0, 151, 167, 0.18);
+  box-shadow: 0 0 0 4px rgba(167, 147, 232, 0.2);
 }
 
 select.is-loading {
@@ -195,7 +195,7 @@ select.is-loading {
 
 .hint {
   font-size: 12px;
-  color: var(--ink-muted);
+  color: #8078ac;
   align-self: center;
 }
 
@@ -215,7 +215,7 @@ button {
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
-  box-shadow: 0 14px 30px rgba(0, 105, 192, 0.28);
+  box-shadow: 0 14px 30px rgba(164, 145, 224, 0.3);
   position: relative;
   overflow: hidden;
   min-width: 246px;
@@ -261,7 +261,7 @@ button:disabled {
 
 .message {
   font-size: 13px;
-  color: #134676;
+  color: #6c5ca9;
   animation: fadeIn 220ms ease;
 }
 

@@ -63,7 +63,7 @@ function useCities(region) {
 
 function PersonCard({ label, person, onChange, regions }) {
   const { cities, loading } = useCities(person.region);
-  const ticketCode = label.includes('A') ? 'A-BOARD' : 'B-BOARD';
+  const ticketCode = label.includes('A') ? 'КАРТОЧКА 1' : 'КАРТОЧКА 2';
 
   return (
     <section className="card ticket-card">
@@ -73,8 +73,8 @@ function PersonCard({ label, person, onChange, regions }) {
           <div className="ticket-title">{label}</div>
         </div>
         <div className="ticket-meta">
-          <span>Gate 14</span>
-          <span>Class Love</span>
+          <span>Синастрия</span>
+          <span>Лунный поток</span>
         </div>
       </div>
 

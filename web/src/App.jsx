@@ -9,6 +9,11 @@ const emptyPerson = {
   region: '',
   city: ''
 };
+const HOUSE_SYSTEMS = [
+  { value: 'whole_sign', label: 'Целый знак (Whole Sign)' },
+  { value: 'equal', label: 'Равнодомная (Equal)' },
+  { value: 'solar', label: 'Солнечные дома (Solar)' }
+];
 
 function useRegions() {
   const [regions, setRegions] = useState([]);
@@ -223,6 +228,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [page, setPage] = useState('calculator');
+  const [houseSystem, setHouseSystem] = useState('whole_sign');
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -262,7 +268,8 @@ export default function App() {
     });
     const body = JSON.stringify({
       partnerA: payload(partnerA),
-      partnerB: payload(partnerB)
+      partnerB: payload(partnerB),
+      houseSystem
     });
 
     try {
@@ -370,6 +377,20 @@ export default function App() {
 
       {page === 'calculator' && (
         <form className="form" onSubmit={handleSubmit}>
+          <section className="card settings-card">
+            <label>
+              Система расчёта домов
+              <select value={houseSystem} onChange={(e) => setHouseSystem(e.target.value)}>
+                {HOUSE_SYSTEMS.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <div className="hint">При неизвестном времени дома не рассчитываются независимо от выбранной системы.</div>
+          </section>
+
           <PersonCard
             label="Партнёр A"
             person={partnerA}

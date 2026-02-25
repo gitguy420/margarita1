@@ -260,16 +260,43 @@ export default function App() {
         city: p.city
       }
     });
+    const body = JSON.stringify({
+      partnerA: payload(partnerA),
+      partnerB: payload(partnerB)
+    });
 
     try {
       const apiBase = import.meta.env.VITE_API_URL || '';
+      const tg = window.Telegram?.WebApp;
+      const isMiniApp = Boolean(tg);
+
+      if (isMiniApp) {
+        const linkRes = await fetch(`${apiBase}/api/report-link`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body
+        });
+
+        if (!linkRes.ok) {
+          const data = await linkRes.json().catch(() => ({}));
+          setMessage(data.error || 'Ошибка генерации отчёта');
+          return;
+        }
+
+        const data = await linkRes.json();
+        if (!data.url) {
+          setMessage('Не удалось получить ссылку на PDF');
+          return;
+        }
+        tg.openLink(data.url);
+        setMessage('PDF открыт. В браузере можно сохранить файл.');
+        return;
+      }
+
       const res = await fetch(`${apiBase}/api/report`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          partnerA: payload(partnerA),
-          partnerB: payload(partnerB)
-        })
+        body
       });
 
       if (!res.ok) {

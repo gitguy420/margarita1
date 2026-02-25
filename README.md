@@ -104,3 +104,55 @@ Vercel конфиг: [`web/vercel.json`](/Users/sasharomanov/Documents/TG/web/ve
 2. Регионы/города загружаются.
 3. Генерация PDF работает за 10-30 секунд.
 4. В логах backend нет ошибок CORS.
+
+## Staging на VPS (без Vercel/Render)
+
+Для безопасной доработки дизайна держите 2 окружения одновременно:
+- `prod`: `https://<DOMAIN>`
+- `staging`: `https://<STAGING_DOMAIN>`
+
+Для IP `188.137.177.219` можно использовать:
+- `DOMAIN=188.137.177.219.sslip.io`
+- `STAGING_DOMAIN=staging.188.137.177.219.sslip.io`
+
+### 1) Подготовка `.env`
+
+Файл: [`deploy/.env.example`](/Users/sasharomanov/Documents/TG/deploy/.env.example)
+
+Нужные переменные:
+- `DOMAIN`
+- `STAGING_DOMAIN`
+- `EMAIL`
+- `BRAND_NAME`
+
+### 2) Первый запуск prod + staging
+
+```bash
+cd /opt/tg/deploy
+docker-compose -f docker-compose.yml -f docker-compose.staging.yml up -d --build
+```
+
+### 3) Обновлять только staging при правках дизайна
+
+```bash
+cd /opt/tg
+git pull
+cd deploy
+docker-compose -f docker-compose.yml -f docker-compose.staging.yml up -d --build app_staging caddy
+```
+
+### 4) Промоут изменений в prod после проверки
+
+```bash
+cd /opt/tg
+git pull
+cd deploy
+docker-compose up -d --build app caddy
+```
+
+### 5) Проверка
+
+```bash
+curl -I https://<DOMAIN>/api/status
+curl -I https://<STAGING_DOMAIN>/api/status
+```

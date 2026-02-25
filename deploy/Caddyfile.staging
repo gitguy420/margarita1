@@ -1,0 +1,17 @@
+{$DOMAIN} {
+  tls {$EMAIL}
+  encode gzip
+
+  @api path /api/*
+  reverse_proxy @api app:4100
+  reverse_proxy app:4100
+}
+
+{$STAGING_DOMAIN} {
+  tls {$EMAIL}
+  encode gzip
+
+  @api path /api/*
+  reverse_proxy @api app_staging:4100
+  reverse_proxy app_staging:4100
+}

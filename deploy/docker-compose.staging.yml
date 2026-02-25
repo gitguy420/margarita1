@@ -1,0 +1,28 @@
+services:
+  app_staging:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: margarita-app-staging
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4100
+      BRAND_NAME: ${BRAND_NAME:-Margarita}
+      CORS_ORIGIN: https://${STAGING_DOMAIN}
+      PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium
+    expose:
+      - "4100"
+
+  caddy:
+    environment:
+      DOMAIN: ${DOMAIN}
+      STAGING_DOMAIN: ${STAGING_DOMAIN}
+      EMAIL: ${EMAIL}
+    volumes:
+      - ./Caddyfile.staging:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+      - app_staging

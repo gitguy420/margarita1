@@ -63,10 +63,23 @@ function useCities(region) {
 
 function PersonCard({ label, person, onChange, regions }) {
   const { cities, loading } = useCities(person.region);
+  const ticketCode = label.includes('A') ? 'A-BOARD' : 'B-BOARD';
 
   return (
-    <section className="card">
-      <div className="card-title">{label}</div>
+    <section className="card ticket-card">
+      <div className="ticket-head">
+        <div className="ticket-route">
+          <span className="ticket-chip">{ticketCode}</span>
+          <div className="ticket-title">{label}</div>
+        </div>
+        <div className="ticket-meta">
+          <span>Gate 14</span>
+          <span>Class Love</span>
+        </div>
+      </div>
+
+      <div className="ticket-divider" aria-hidden="true" />
+
       <div className="grid">
         <label>
           Имя
@@ -137,6 +150,7 @@ function PersonCard({ label, person, onChange, regions }) {
         <label>
           Город
           <select
+            className={loading ? 'is-loading' : ''}
             value={person.city}
             onChange={(e) => onChange({ city: e.target.value })}
             required
@@ -198,33 +212,36 @@ export default function App() {
       }
     });
 
-    const apiBase = import.meta.env.VITE_API_URL || '';
-    const res = await fetch(`${apiBase}/api/report`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        partnerA: payload(partnerA),
-        partnerB: payload(partnerB)
-      })
-    });
+    try {
+      const apiBase = import.meta.env.VITE_API_URL || '';
+      const res = await fetch(`${apiBase}/api/report`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          partnerA: payload(partnerA),
+          partnerB: payload(partnerB)
+        })
+      });
 
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setMessage(data.error || 'Ошибка генерации отчёта');
+        return;
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'synastry-report.pdf';
+      a.click();
+      URL.revokeObjectURL(url);
+      setMessage('Готово! Отчёт скачан.');
+    } catch (_err) {
+      setMessage('Ошибка сети. Проверьте соединение и попробуйте снова.');
+    } finally {
       setLoading(false);
-      setMessage(data.error || 'Ошибка генерации отчёта');
-      return;
     }
-
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'synastry-report.pdf';
-    a.click();
-    URL.revokeObjectURL(url);
-
-    setLoading(false);
-    setMessage('Готово! Отчёт скачан.');
   }
 
   return (
@@ -251,8 +268,11 @@ export default function App() {
         />
 
         <div className="submit">
-          <button type="submit" disabled={!isReady || loading}>
-            {loading ? 'Генерируем...' : 'Получить PDF отчёт'}
+          <button className={loading ? 'is-busy' : ''} type="submit" disabled={!isReady || loading}>
+            <span className="btn-core">{loading ? 'Рейс формируется' : 'Получить PDF отчёт'}</span>
+            <span className="btn-plane" aria-hidden="true">
+              ✈
+            </span>
           </button>
           {message && <div className="message">{message}</div>}
         </div>

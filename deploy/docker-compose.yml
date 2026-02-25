@@ -1,0 +1,36 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: margarita-app
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4100
+      BRAND_NAME: ${BRAND_NAME:-Margarita}
+      CORS_ORIGIN: https://${DOMAIN}
+      PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium
+    expose:
+      - "4100"
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: margarita-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN}
+      EMAIL: ${EMAIL}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  caddy_data:
+  caddy_config:

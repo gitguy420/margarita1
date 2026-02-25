@@ -1,0 +1,10 @@
+{$DOMAIN} {
+  tls {$EMAIL}
+  encode gzip
+
+  @api path /api/*
+  reverse_proxy @api app:4100
+
+  # Everything else (Mini App frontend) is served by Express static
+  reverse_proxy app:4100
+}

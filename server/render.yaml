@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: margarita-synastry-api
+    runtime: docker
+    rootDir: server
+    plan: starter
+    autoDeploy: true
+    healthCheckPath: /api/status
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: BRAND_NAME
+        value: Margarita

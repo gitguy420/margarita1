@@ -327,7 +327,7 @@ export default function App() {
         <div className="hero-layout">
           <div className="hero-copy">
             <div className="sparkle">✦</div>
-            <h1>Маргарита</h1>
+            <h1>Лунный Поток</h1>
             <p>Синастрия, которая раскрывает сильные стороны пары и даёт нежные подсказки ❤️</p>
           </div>
           <div className="hero-art" aria-hidden="true">

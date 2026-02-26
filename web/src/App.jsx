@@ -262,7 +262,10 @@ export default function App() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!isReady) return;
+    if (!isReady) {
+      setMessage('Заполните все поля для обоих партнёров, включая дату, время/флаг "время неизвестно", регион и город.');
+      return;
+    }
 
     setLoading(true);
     setMessage('Создаём отчёт… это может занять до 20 секунд.');
@@ -421,7 +424,7 @@ export default function App() {
           </section>
 
           <div className="submit">
-            <button className={loading ? 'is-busy' : ''} type="submit" disabled={!isReady || loading}>
+            <button className={loading ? 'is-busy' : ''} type="submit" disabled={loading}>
               <span className="btn-core">{loading ? 'Рейс формируется' : 'Получить PDF отчёт'}</span>
               <span className="btn-doc" aria-hidden="true">
                 📄

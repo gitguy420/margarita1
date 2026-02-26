@@ -256,15 +256,28 @@ h1 {
 .house-systems-card {
   display: grid;
   gap: 12px;
+  position: relative;
+  overflow: hidden;
 }
 
 .house-systems-card h3 {
   margin: 0;
-  color: #261a54;
+  color: #1f1543;
   font-family: 'Playfair Display', serif;
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.02em;
+}
+
+.house-systems-card::before {
+  content: '';
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  right: -54px;
+  top: -54px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.34), transparent 68%);
+  pointer-events: none;
 }
 
 .house-grid {
@@ -277,10 +290,10 @@ h1 {
   min-width: 0;
   width: 100%;
   border-radius: 14px;
-  border: 1px solid rgba(78, 57, 138, 0.32);
-  background: rgba(232, 220, 255, 0.72);
-  box-shadow: none;
-  color: #2b1f5c;
+  border: 1px solid rgba(212, 195, 255, 0.9);
+  background: linear-gradient(145deg, rgba(179, 156, 233, 0.88), rgba(171, 149, 229, 0.8) 70%);
+  box-shadow: 0 10px 20px rgba(46, 28, 94, 0.12);
+  color: #1f1543;
   padding: 12px 12px 10px;
   display: grid;
   gap: 6px;
@@ -297,13 +310,13 @@ h1 {
 .house-option:hover:not(:disabled) {
   transform: translateY(-1px);
   filter: none;
-  background: rgba(238, 229, 255, 0.9);
+  background: linear-gradient(145deg, rgba(186, 164, 238, 0.95), rgba(173, 152, 230, 0.92) 70%);
 }
 
 .house-option.active {
-  border-color: rgba(57, 41, 109, 0.75);
-  background: linear-gradient(140deg, rgba(255, 243, 212, 0.94), rgba(229, 215, 255, 0.96));
-  box-shadow: 0 10px 20px rgba(46, 28, 94, 0.16);
+  border-color: #2e2162;
+  background: linear-gradient(145deg, rgba(255, 243, 212, 0.94), rgba(230, 216, 255, 0.98));
+  box-shadow: 0 12px 24px rgba(46, 28, 94, 0.2);
 }
 
 .house-option-title {
